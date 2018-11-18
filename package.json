@@ -1,0 +1,26 @@
+{
+  "name": "angular-electron-cli",
+  "version": "1.0.0",
+  "description": "cli to create electron app based on angular framework",
+  "main": "index.js",
+  "bin": {
+    "el-cli": "./bin/electron-cli"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "keywords": [
+    "electron",
+    "angular",
+    "cli"
+  ],
+  "author": "Denis Lykov",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "inquirer": "^6.2.0"
+  }
+}
