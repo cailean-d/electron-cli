@@ -1,6 +1,6 @@
 {
   "name": "angular-electron-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cli to create electron app based on angular framework",
   "main": "index.js",
   "bin": {
