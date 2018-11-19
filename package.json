@@ -1,8 +1,9 @@
 {
   "name": "angular-electron-cli",
-  "version": "1.0.2",
+  "version": "0.2.2",
   "description": "cli to create electron app based on angular framework",
   "main": "index.js",
+  "preferGlobal": true,
   "bin": {
     "electron-cli": "./bin/electron-cli"
   },
@@ -10,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "keywords": [
     "electron",
@@ -21,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.19.0",
+    "cross-spawn": "^6.0.5",
     "inquirer": "^6.2.0"
   }
 }

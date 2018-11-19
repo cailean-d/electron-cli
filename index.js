@@ -7,9 +7,9 @@ program
 
 program
   .command('create')
-  .alias('generate')
+  // .alias('generate')
   .description('Create electron project')
-  .option('-m, --mode [type]', 'Type of application [angular]', 'angular')
+  // .option('-m, --mode [type]', 'Type of application [angular]', 'angular')
   .action(require('./commands/create'))
 
 program
@@ -17,15 +17,13 @@ program
   .description('Build project')
   .action(require('./commands/build'))
 
-program.on('option:verbose', function () {
-  console.log('');
-  program.help();
-});
-
-program.on('command:*', function () {
-  console.log('');
-  program.help();
-});
+program.on('option:*', showHelp);
+program.on('command:*', showHelp);
 
 program
   .parse(process.argv);
+
+function showHelp() {
+  console.log('');
+  program.help();
+}
