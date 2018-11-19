@@ -3,31 +3,29 @@ const { version } = require('./package.json');
 
 program
   .version(version, '-v, --version')
-//   .option('-v, --version', 'Output CLI version')
-//   .option('-P, --pineapple', 'Add pineapple')
-//   .option('-b, --bbq-sauce', 'Add bbq sauce')
-//   .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble');
-
-// program
-//   .command('version')
-//   .description('Output CLI version')
-//   .action(require('./commands/version'));
+  // .allowUnknownOption()
 
 program
   .command('create')
+  .alias('generate')
+  .description('Create electron project')
   .option('-m, --mode [type]', 'Type of application [angular]', 'angular')
-  .action(require('./commands/create'));
+  .action(require('./commands/create'))
 
 program
   .command('build')
-//   .option('-m, --mode [type]', 'Type of application [angular]', 'angular')
-  .action(require('./commands/build'));
+  .description('Build project')
+  .action(require('./commands/build'))
+
+program.on('option:verbose', function () {
+  console.log('');
+  program.help();
+});
+
+program.on('command:*', function () {
+  console.log('');
+  program.help();
+});
 
 program
   .parse(process.argv);
-
-// console.log('you ordered a pizza with:');
-// if (program.version) require('./commands/version')();
-// if (program.pineapple) console.log('  - pineapple');
-// if (program.bbqSauce) console.log('  - bbq');
-// console.log('  - %s cheese', program.cheese);

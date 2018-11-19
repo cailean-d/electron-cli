@@ -1,3 +1,21 @@
+const inquirer = require('inquirer');
+
 module.exports = function() {
-    console.log('build...');
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'os',
+                message: 'Choose OS type',
+                default: 'windows',
+                choices: [
+                    'windows',
+                    'linux',
+                    'macos',
+                ]
+            },
+        ])
+        .then(answers => {
+            console.log(answers);
+        });
 }
