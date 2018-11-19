@@ -4,7 +4,7 @@
   "description": "cli to create electron app based on angular framework",
   "main": "index.js",
   "bin": {
-    "el-cli": "./bin/electron-cli"
+    "electron-cli": "./bin/electron-cli"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
