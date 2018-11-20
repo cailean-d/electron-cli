@@ -25,7 +25,7 @@ var cmd = `ng new ${project} --style=${style} --skipInstall=${install} --routing
 const spawn = require('cross-spawn');
 
 // Spawn NPM asynchronously
-const child = spawn('ng', ['new', 'test-proj']);
+const child = spawn(cmd, { shell: true });
 
 
 // var spawn = require('child_process').spawn;

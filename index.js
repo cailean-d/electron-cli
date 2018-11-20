@@ -7,7 +7,6 @@ program
 
 program
   .command('create')
-  // .alias('generate')
   .description('Create electron project')
   // .option('-m, --mode [type]', 'Type of application [angular]', 'angular')
   .action(require('./commands/create'))
