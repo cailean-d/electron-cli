@@ -1,21 +1,7 @@
 const inquirer = require('inquirer');
+const { build } = require('./../util/questions');
 
-module.exports = function() {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                name: 'os',
-                message: 'Choose OS type',
-                default: 'windows',
-                choices: [
-                    'windows',
-                    'linux',
-                    'macos',
-                ]
-            },
-        ])
-        .then(answers => {
-            console.log(answers);
-        });
+module.exports = async function() {
+    const answers = await inquirer.prompt(build);
+    console.log(answers);
 }
