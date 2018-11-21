@@ -14,7 +14,7 @@ module.exports = function(options) {
     generateAngular(options);
   }
   if (options.project_type === 'Vue') {
-    console.log('Generation vue project...');
+    generateVue(options);
   }
 }
 
@@ -31,22 +31,6 @@ async function generateAngular(opts) {
   }
 }
 
-function editPackageJSON(opts) {
-  const spinner = ora('Editing package.json').start();
-  let package = editJsonFile(path.join(opts.project_path, 'package.json'));
-  package.set("name", opts.project_name);
-  package.set("version", opts.version);
-  package.set("main", "main.js");
-  if (opts.description) package.set("description", opts.description);
-  if (opts.author) package.set("author", opts.author);
-  if (opts.license) package.set("license", opts.license);
-  if (opts.keywords) package.set("keywords", opts.keywords.split(' '));
-  if (opts.git) package.set("repository.type", "git");
-  if (opts.git) package.set("repository.url", opts.git);
-  package.save();
-  spinner.succeed();
-}
-
 async function generateJS(opts) {
 
   try {
@@ -61,6 +45,26 @@ async function generateJS(opts) {
   }
 
   editPackageJSON(opts);
+}
+
+async function generateVue(opts) {
+  console.log('Generation vue project...');
+}
+
+function editPackageJSON(opts) {
+  const spinner = ora('Editing package.json').start();
+  let package = editJsonFile(path.join(opts.project_path, 'package.json'));
+  package.set("name", opts.project_name);
+  package.set("version", opts.version);
+  package.set("main", "main.js");
+  if (opts.description) package.set("description", opts.description);
+  if (opts.author) package.set("author", opts.author);
+  if (opts.license) package.set("license", opts.license);
+  if (opts.keywords) package.set("keywords", opts.keywords.split(' '));
+  if (opts.git) package.set("repository.type", "git");
+  if (opts.git) package.set("repository.url", opts.git);
+  package.save();
+  spinner.succeed();
 }
 
 function runShellCommand(name, command, options, beforeFunc, afterFunc) {
