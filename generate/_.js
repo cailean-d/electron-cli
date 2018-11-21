@@ -1,12 +1,9 @@
-const spawn = require('cross-spawn');
-const ora = require('ora');
-const editJsonFile = require('edit-json-file');
-const path = require('path');
 const fs = require('fs');
 const util = require('util');
 
 const generateLicense = require('./license');
 const editPackageJSON = require('./json');
+const runShellCommand = require('./../util/shell');
 
 fs.mkdirAsync = util.promisify(fs.mkdir);
 
@@ -54,31 +51,4 @@ async function generateJS(opts) {
 
 async function generateVue(opts) {
   console.log('Generation vue project...');
-}
-
-function runShellCommand(name, command, options, beforeFunc, afterFunc) {
-  return new Promise((resolve, reject) => {
-
-    console.log('');
-    const spinner = ora(name).start();
-    
-    if (beforeFunc) beforeFunc();
-    const child = spawn(command, options);
-
-    child.on('close', (code) => {
-      if (code === 0) {
-        spinner.succeed();
-        if (afterFunc) afterFunc();
-        resolve();
-      } else {
-        reject('Error: ' + code);        
-      }
-    })
-    
-    child.on('error', (error) => {
-      spinner.fail();
-      reject(error);
-    })
-  
-  });
 }
