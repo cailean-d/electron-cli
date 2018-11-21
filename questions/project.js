@@ -10,6 +10,7 @@ module.exports = [
 				'Pure JS',
 				'Angular',
 				'Vue',
+				'React'
 		]
 	},
   {

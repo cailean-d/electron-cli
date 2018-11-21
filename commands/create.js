@@ -7,6 +7,7 @@ const generateProject = require('../generate/_');
 const parseStyle = require('./../util/parse-style');
 const project = require('./../questions/project');
 const purejs = require('./../questions/purejs');
+const react = require('./../questions/react');
 const vue = require('./../questions/vue');
 
 let answer, answers = [];
@@ -37,6 +38,12 @@ module.exports = async function() {
             case 'Vue':
                 console.log('\nVue configuration...\n'.cyan);
                 answer = await inquirer.prompt(vue);
+                answers.push(answer);
+                break;
+
+            case 'React':
+                console.log('\nReact configuration...\n'.cyan);
+                answer = await inquirer.prompt(react);
                 answers.push(answer);
                 break;
         

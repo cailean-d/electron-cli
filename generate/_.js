@@ -10,12 +10,14 @@ fs.mkdirAsync = util.promisify(fs.mkdir);
 module.exports = function(options) {  
   if (options.project_type === 'Pure JS') {
     generateJS(options);
-  }
-  if (options.project_type === 'Angular') {
+  } else if (options.project_type === 'Angular') {
     generateAngular(options);
-  }
-  if (options.project_type === 'Vue') {
+  } else if (options.project_type === 'Vue') {
     generateVue(options);
+  } else if (options.project_type === 'React') {
+    generateReact(options);
+  } else {
+    console.error('Cannot define project type');
   }
 }
 
@@ -50,5 +52,9 @@ async function generateJS(opts) {
 }
 
 async function generateVue(opts) {
-  console.log('Generation vue project...');
+  console.log('Generating vue project...');
+}
+
+async function generateReact(opts) {
+  console.log('Generating react project...')
 }
