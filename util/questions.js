@@ -43,10 +43,24 @@ exports.project = [
 		message: 'Description: ',
 	},
 	{
-		type: 'input',
+		type: 'list',
 		name: 'license',
 		message: 'License: ',
-		default: 'MIT'
+		choices: [
+			'ISC',
+			'MIT',
+		]
+	},
+	{
+		type: 'confirm',
+		name: 'license_file',
+		message: 'Add license file: ',
+		default: true
+	},
+	{
+		type: 'input',
+		name: 'email',
+		message: 'Email: ',
 	},
 	{
 		type: 'input',
@@ -60,12 +74,6 @@ exports.project = [
 		validate: function(input) {
 			return /($^)|(^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$)/.test(input);
 		}
-	},
-	{
-		type: 'confirm',
-		name: 'license_file',
-		message: 'Add license file: ',
-		default: true
 	},
 	{
 		type: 'confirm',

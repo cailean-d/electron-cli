@@ -1,6 +1,6 @@
 {
   "name": "angular-electron-cli",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "cli to create electron app",
   "main": "index.js",
   "preferGlobal": true,
@@ -26,6 +26,7 @@
     "commander": "^2.19.0",
     "cross-spawn": "^6.0.5",
     "edit-json-file": "^1.2.0",
+    "ejs": "^2.6.1",
     "inquirer": "^6.2.0",
     "ora": "^3.0.0"
   }

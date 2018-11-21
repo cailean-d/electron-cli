@@ -3,6 +3,11 @@ const ora = require('ora');
 const editJsonFile = require('edit-json-file');
 const path = require('path');
 const fs = require('fs');
+const util = require('util');
+
+const generateLicense = require('./generate-license');
+
+fs.mkdirAsync = util.promisify(fs.mkdir);
 
 module.exports = function(options) {
   options.style = getStyle(options);
@@ -38,13 +43,14 @@ async function generateJS(opts) {
       'Creating javascript project', 
       'npm init -y', 
       { shell: true, cwd: opts.project_path }, 
-      () => fs.mkdirSync(opts.project_path)
+      async () => await fs.mkdirAsync(opts.project_path)
     );    
   } catch (error) {
     console.log(error);
   }
 
   editPackageJSON(opts);
+  generateLicense(opts);
 }
 
 async function generateVue(opts) {
