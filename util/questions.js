@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 
 exports.project = [
 	{
@@ -16,6 +18,8 @@ exports.project = [
     message: 'Project name: ',
 		default: 'new-project',
 		validate: function(input) {
+			let directory = path.join(process.cwd(), input);
+			if (fs.existsSync(directory)) return false;
 			return /^[\w-_\\.]+$/.test(input);
 		}
   },

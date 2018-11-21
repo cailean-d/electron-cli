@@ -3,6 +3,7 @@ const { project, electron, angular, vue, purejs } = require('./../util/questions
 const colors = require('colors');
 const welcome = require('./../util/welcome');
 const generate = require('./../util/generate');
+const path = require('path');
 
 let answer, answers = [];
 
@@ -10,7 +11,7 @@ module.exports = async function() {
 
     try {
         
-        await welcome();
+        // await welcome();
 
         console.log('\nBasic configuration...\n'.cyan);
         answer = await inquirer.prompt(project);
@@ -44,6 +45,7 @@ module.exports = async function() {
                 break;
         }
 
+        answers[0].project_path = path.join(process.cwd(), answers[0].project_name);
         answers = Object.assign({}, answers[0], answers[1], answers[2]);
         generate(answers);
 
