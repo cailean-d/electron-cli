@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const colors = require('colors');
 const angular = require('./../questions/angular');
 const electron = require('./../questions/electron');
-const generate = require('./../util/generate');
+const generateProject = require('./../util/generate');
 const parseStyle = require('./../util/parse-style');
 const project = require('./../questions/project');
 const purejs = require('./../questions/purejs');
@@ -47,7 +47,7 @@ module.exports = async function() {
 
         genProjectPath();
         genProjectOptions();
-        generate(answers);
+        generateProject(answers);
 
     } catch (error) {
         console.log(error);
