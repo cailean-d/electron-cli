@@ -11,7 +11,7 @@ module.exports = async function (opts) {
   const spinner = ora('Generating license').start();
   setTimeout(() => {
     let spin;
-    if (!opts.author) spin = ora('No Author').start(); spin.warn();
+    if (!opts.author) spin = ora('No author').start(); spin.warn();
   }, 50);
   try {
     let out = await genLicense(opts, opts.license);

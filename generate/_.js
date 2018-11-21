@@ -2,7 +2,7 @@ const fs = require('fs');
 const util = require('util');
 
 const generateLicense = require('./license');
-const editPackageJSON = require('./json');
+const editPackageJSON = require('./package');
 const runShellCommand = require('./../util/shell');
 
 fs.mkdirAsync = util.promisify(fs.mkdir);
