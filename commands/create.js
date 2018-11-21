@@ -45,12 +45,20 @@ module.exports = async function() {
                 break;
         }
 
-        answers[0].project_path = path.join(process.cwd(), answers[0].project_name);
-        answers = Object.assign({}, answers[0], answers[1], answers[2]);
+        genProjectPath();
+        genProjectOptions();
         answers.style = parseStyle(answers.style);
         generate(answers);
 
     } catch (error) {
         console.log(error);
     }
+}
+
+function genProjectPath() {
+    answers[0].project_path = path.join(process.cwd(), answers[0].project_name);
+}
+
+function genProjectOptions() {
+    answers = Object.assign({}, answers[0], answers[1], answers[2]);
 }
