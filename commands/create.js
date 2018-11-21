@@ -47,7 +47,6 @@ module.exports = async function() {
 
         genProjectPath();
         genProjectOptions();
-        answers.style = parseStyle(answers.style);
         generate(answers);
 
     } catch (error) {
@@ -61,4 +60,5 @@ function genProjectPath() {
 
 function genProjectOptions() {
     answers = Object.assign({}, answers[0], answers[1], answers[2]);
+    answers.style = parseStyle(answers.style);
 }
