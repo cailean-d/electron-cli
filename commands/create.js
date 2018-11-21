@@ -7,16 +7,11 @@ const generate = require('./../util/generate');
 const project = require('./../questions/project');
 const purejs = require('./../questions/purejs');
 const vue = require('./../questions/vue');
-const welcome = require('./../util/welcome');
 
 let answer, answers = [];
 
 module.exports = async function() {
-
     try {
-        
-        // await welcome();
-
         console.log('\nBasic configuration...\n'.cyan);
         answer = await inquirer.prompt(project);
         answers.push(answer);
@@ -56,5 +51,4 @@ module.exports = async function() {
     } catch (error) {
         console.log(error);
     }
-
 }

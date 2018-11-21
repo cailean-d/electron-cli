@@ -1,14 +1,14 @@
 const program = require('commander');
 const { version } = require('./package.json');
+const welcome = require('./util/welcome');
 
 program
   .version(version, '-v, --version')
-  // .allowUnknownOption()
+  .allowUnknownOption()
 
 program
   .command('create')
   .description('Create electron project')
-  // .option('-m, --mode [type]', 'Type of application [angular]', 'angular')
   .action(require('./commands/create'))
 
 program
@@ -22,7 +22,11 @@ program.on('command:*', showHelp);
 program
   .parse(process.argv);
 
-function showHelp() {
-  console.log('');
+async function showHelp() {
+  await welcome();
   program.help();
+}
+
+if (process.argv.length <= 2) {
+  showHelp();
 }
