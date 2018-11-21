@@ -12,7 +12,6 @@ module.exports = async function (opts) {
   setTimeout(() => {
     let spin;
     if (!opts.author) spin = ora('No Author').start(); spin.warn();
-    if (!opts.email) spin = ora('No Email').start(); spin.warn();
   }, 50);
   try {
     let out = await genLicense(opts, opts.license);
