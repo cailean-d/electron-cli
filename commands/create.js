@@ -1,9 +1,13 @@
-const inquirer = require('inquirer');
-const { project, electron, angular, vue, purejs } = require('./../util/questions');
-const colors = require('colors');
-const welcome = require('./../util/welcome');
-const generate = require('./../util/generate');
 const path = require('path');
+const inquirer = require('inquirer');
+const colors = require('colors');
+const angular = require('./../questions/angular');
+const electron = require('./../questions/electron');
+const generate = require('./../util/generate');
+const project = require('./../questions/project');
+const purejs = require('./../questions/purejs');
+const vue = require('./../questions/vue');
+const welcome = require('./../util/welcome');
 
 let answer, answers = [];
 

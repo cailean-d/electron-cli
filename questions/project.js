@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-exports.project = [
+module.exports = [
 	{
 		type: 'list',
 		name: 'project_type',
@@ -82,93 +82,3 @@ exports.project = [
 		default: false
 	},
 ];
-
-exports.electron = [
-	{
-		type: 'confirm',
-		name: 'default_menu',
-		message: 'Add default menu: ',
-		default: true
-	},
-	{
-		type: 'confirm',
-		name: 'license_file',
-		message: 'Open devTools in development mode: ',
-		default: true
-	},
-]
-
-exports.angular = [
-	{
-		type: 'list',
-		name: 'style',
-		message: 'Style: ',
-		choices: [
-				'CSS',
-				'SCSS   [ http://sass-lang.com   ]',
-				'SASS   [ http://sass-lang.com   ]',
-				'LESS   [ http://lesscss.org     ]',
-				'Stylus [ http://stylus-lang.com ]'
-		]
-	},
-	{
-		type: 'confirm',
-		name: 'routing',
-		message: 'Add routing module: ',
-		default: true
-	},
-	{
-		type: 'confirm',
-		name: 'translate',
-		message: 'Add Ngx-Translate: ',
-		default: true
-	},
-	{
-		type: 'confirm',
-		name: 'provider',
-		message: 'Add electron provider: ',
-		default: true
-	},
-]
-
-exports.vue = [
-
-]
-
-exports.purejs = [
-	{
-		type: 'list',
-		name: 'lang',
-		message: 'Language: ',
-		choices: [
-				'JavaScript',
-				'TypeScript',
-		]
-	},
-	{
-		type: 'list',
-		name: 'style',
-		message: 'Style: ',
-		choices: [
-				'CSS',
-				'SCSS   [ http://sass-lang.com   ]',
-				'SASS   [ http://sass-lang.com   ]',
-				'LESS   [ http://lesscss.org     ]',
-				'Stylus [ http://stylus-lang.com ]'
-		]
-	},
-]
-
-exports.build = [
-	{
-		type: 'list',
-		name: 'os',
-		message: 'Choose OS type',
-		default: 'windows',
-		choices: [
-				'windows',
-				'linux',
-				'macos',
-		]
-	},
-]

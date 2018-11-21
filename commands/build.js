@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { build } = require('./../util/questions');
+const build = require('./../questions/build');
 
 module.exports = async function() {
     try {
