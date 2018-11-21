@@ -9,9 +9,7 @@ const generateLicense = require('./generate-license');
 
 fs.mkdirAsync = util.promisify(fs.mkdir);
 
-module.exports = function(options) {
-  options.style = getStyle(options);
-  
+module.exports = function(options) {  
   if (options.project_type === 'Pure JS') {
     generateJS(options);
   }
@@ -98,9 +96,4 @@ function runShellCommand(name, command, options, beforeFunc, afterFunc) {
     })
   
   });
-}
-
-function getStyle(opts) {
-  const res = opts.style.match(/(^[A-z]+)\s?/);
-  return res[1].toLowerCase();
 }

@@ -4,6 +4,7 @@ const colors = require('colors');
 const angular = require('./../questions/angular');
 const electron = require('./../questions/electron');
 const generate = require('./../util/generate');
+const parseStyle = require('./../util/parse-style');
 const project = require('./../questions/project');
 const purejs = require('./../questions/purejs');
 const vue = require('./../questions/vue');
@@ -46,6 +47,7 @@ module.exports = async function() {
 
         answers[0].project_path = path.join(process.cwd(), answers[0].project_name);
         answers = Object.assign({}, answers[0], answers[1], answers[2]);
+        answers.style = parseStyle(answers.style);
         generate(answers);
 
     } catch (error) {
