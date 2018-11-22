@@ -7,7 +7,7 @@ module.exports = [
 		name: 'project_type',
 		message: 'Project framework: ',
 		choices: [
-				'Pure JS',
+				'No framework',
 				'Angular',
 				'Vue',
 				'React'
