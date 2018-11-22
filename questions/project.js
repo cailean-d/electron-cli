@@ -50,6 +50,7 @@ module.exports = [
 		choices: [
 			'ISC',
 			'MIT',
+			'CC0_1.0',
 		]
 	},
 	{
