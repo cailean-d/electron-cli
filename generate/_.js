@@ -4,6 +4,7 @@ const util = require('util');
 const generateLicense = require('./license');
 const editPackageJSON = require('./package');
 const runShellCommand = require('./../util/shell');
+const installNpmPackages = require('./npm-install');
 
 fs.mkdirAsync = util.promisify(fs.mkdir);
 
@@ -39,9 +40,10 @@ async function generateJS(opts) {
   try {
     await runShellCommand(
       'Creating javascript project', 
-      'npm init -y', 
-      { shell: true, cwd: opts.project_path }, 
-      async () => await fs.mkdirAsync(opts.project_path)
+      'npm init -y', { 
+        shell: true, 
+        cwd: opts.project_path 
+      }, async () => await fs.mkdirAsync(opts.project_path)
     );    
   } catch (error) {
     console.log(error);
