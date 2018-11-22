@@ -4,8 +4,8 @@ module.exports = [
 		name: 'lang',
 		message: 'Language: ',
 		choices: [
-				'JavaScript',
-				'TypeScript',
+			'TypeScript',
+			'JavaScript',
 		]
 	},
 	{
