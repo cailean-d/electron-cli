@@ -1,6 +1,6 @@
 const runShellCommand = require('./../util/shell');
 
-module.exports = function(opts) {
+module.exports = async function(opts) {
   try {
     await runShellCommand('Installing npm packages', 'npm install --quiet', { 
       shell: true, 
