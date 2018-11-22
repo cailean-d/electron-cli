@@ -13,7 +13,7 @@ const { vscode } = require('./../questions/run');
 fs.mkdirAsync = util.promisify(fs.mkdir);
 
 module.exports = function(options) {  
-  if (options.project_type === 'Pure JS') {
+  if (options.project_type === 'No framework') {
     generateJS(options);
   } else if (options.project_type === 'Angular') {
     generateAngular(options);

@@ -23,7 +23,7 @@ module.exports = async function() {
         answers.push(answer);
 
         switch (answers[0].project_type) {
-            case 'Pure JS':
+            case 'No framework':
                 console.log('\nJavaScript configuration...\n'.cyan);
                 answer = await inquirer.prompt(purejs);
                 answers.push(answer);
