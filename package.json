@@ -1,6 +1,6 @@
 {
   "name": "angular-electron-cli",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "cli to create electron app",
   "main": "index.js",
   "preferGlobal": true,
@@ -28,6 +28,7 @@
     "edit-json-file": "^1.2.0",
     "ejs": "^2.6.1",
     "inquirer": "^6.2.0",
+    "ncp": "^2.0.0",
     "ora": "^3.0.0"
   }
 }

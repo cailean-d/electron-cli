@@ -3,16 +3,17 @@ const ora = require('ora');
 
 module.exports = function (name, command, options, beforeFunc, afterFunc) {
   return new Promise((resolve, reject) => {
+    let spinner;
 
-    console.log('');
-    const spinner = ora(name).start();
+    // console.log('');
+    if (name) spinner = ora(name).start();
     
     if (beforeFunc) beforeFunc();
     const child = spawn(command, options);
 
     child.on('close', (code) => {
       if (code === 0) {
-        spinner.succeed();
+        if (name) spinner.succeed();
         if (afterFunc) afterFunc();
         resolve();
       } else {
@@ -21,7 +22,7 @@ module.exports = function (name, command, options, beforeFunc, afterFunc) {
     })
     
     child.on('error', (error) => {
-      spinner.fail();
+      if (name) spinner.fail();
       reject(error);
     })
   

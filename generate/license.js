@@ -9,10 +9,6 @@ fs.writeFileAsync = util.promisify(fs.writeFile);
 
 module.exports = async function (opts) {
   const spinner = ora('Generating license').start();
-  setTimeout(() => {
-    let spin;
-    if (!opts.author) spin = ora('No author').start(); spin.warn();
-  }, 50);
   try {
     let out = await genLicense(opts, opts.license);
     await fs.writeFileAsync(path.join(opts.project_path, 'LICENSE.md'), out);
@@ -29,7 +25,7 @@ async function genLicense(opts, type) {
   try {
     let src = await fs.readFileAsync(license, 'utf8');
     let template = ejs.compile(src);
-    return template({ year: currentYear, author: opts.author || 'no-author', email: opts.email });
+    return template({ year: currentYear, author: opts.author || 'unknown-author', email: opts.email });
   } catch (error) {
     console.log(error)
   }

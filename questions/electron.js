@@ -7,8 +7,14 @@ module.exports = [
 	},
 	{
 		type: 'confirm',
-		name: 'license_file',
+		name: 'dev_tools',
 		message: 'Open devTools in development mode: ',
+		default: true
+	},
+	{
+		type: 'confirm',
+		name: 'comments',
+		message: 'Add basic comments: ',
 		default: true
 	},
 ]

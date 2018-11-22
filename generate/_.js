@@ -1,10 +1,14 @@
 const fs = require('fs');
 const util = require('util');
+const inquirer = require('inquirer');
 
 const generateLicense = require('./license');
 const editPackageJSON = require('./package');
 const runShellCommand = require('./../util/shell');
 const installNpmPackages = require('./npm-install');
+const genElectron = require('./electron');
+const { basic } = require('./../questions/run');
+const { vscode } = require('./../questions/run');
 
 fs.mkdirAsync = util.promisify(fs.mkdir);
 
@@ -38,19 +42,24 @@ async function generateAngular(opts) {
 async function generateJS(opts) {
 
   try {
+    console.log('');
     await runShellCommand(
-      'Creating javascript project', 
+      'Project initialization', 
       'npm init -y', { 
         shell: true, 
         cwd: opts.project_path 
       }, async () => await fs.mkdirAsync(opts.project_path)
-    );    
+    );
+    editPackageJSON(opts);
+    await generateLicense(opts);
+    await genElectron(opts);
+    if (!opts.skip_install) {
+      await installNpmPackages(opts);
+      await runProject(opts);
+    } 
   } catch (error) {
     console.log(error);
   }
-
-  editPackageJSON(opts);
-  generateLicense(opts);
 }
 
 async function generateVue(opts) {
@@ -59,4 +68,17 @@ async function generateVue(opts) {
 
 async function generateReact(opts) {
   console.log('Generating react project...')
+}
+
+async function runProject(opts) {
+  console.log('');
+  let a = await inquirer.prompt(basic);
+  if (a.run_vscode) {
+    let b = await inquirer.prompt(vscode);
+    let mode = (b.vscode_mode === 'Current window') ? ' -r --add': '';
+    await runShellCommand(null, `code ${opts.project_path}${mode}`, { shell: true });
+  }
+  if (a.run_project) {
+    await runShellCommand(null, 'npm start', { shell: true, cwd: opts.project_path });
+  }
 }
