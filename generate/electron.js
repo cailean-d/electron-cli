@@ -27,8 +27,10 @@ async function editPackage() {
   const el_ver = await checkVersion('electron');
   const tslint_ver = await checkVersion('tslint');
   const typescript_ver = await checkVersion('typescript');
+  const builder_ver = await checkVersion('electron-builder');
   let package = editJsonFile(path.join(options.project_path, 'package.json'));
   package.set("devDependencies.electron", `^${el_ver}`);
+  package.set("devDependencies.electron-builder", `^${builder_ver}`);
   if (options.lang === 'TypeScript') {
     package.set("main", "./dist/main.js");
     package.set("devDependencies.tslint", `^${tslint_ver}`);
@@ -39,6 +41,9 @@ async function editPackage() {
     package.set("scripts.start", "npm run build && electron ./dist/main.js");
   } else if (options.lang === 'JavaScript') {
     package.set("scripts.start", "electron .");
+    package.set("scripts.build:windows", "electron-builder build --windows");
+    package.set("scripts.build:linux", "electron-builder build --linux");
+    package.set("scripts.build:mac", "electron-builder build --mac");
   }
   package.save();
 }
