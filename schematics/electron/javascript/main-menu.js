@@ -2,6 +2,12 @@ const { Menu } = require('electron');
 
 const template = [
   {
+    label: 'File',
+    submenu: [
+      {role: 'close'},
+    ]
+  },
+  {
     label: 'Edit',
     submenu: [
       {role: 'undo'},

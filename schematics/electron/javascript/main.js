@@ -22,10 +22,10 @@ function createWindow() {<% if (comments) { %>
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.<% } %>
     mainWindow = null;
-  });<% if (default_menu) { %>
+  });
   <% if (comments) { %>
   // Set Default menu
-  <% } %>mainWindow.setMenu(defaultMenu);<% } %>
+  <% } %><% if (default_menu) { %>mainWindow.setMenu(defaultMenu);<% } %><% if (!default_menu) { %>mainWindow.setMenu(null);<% } %>
 }
 
 <% if (comments) { %>// This method will be called when Electron has finished

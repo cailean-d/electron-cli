@@ -2,6 +2,12 @@ import { Menu } from "electron";
 
 const template: Electron.MenuItemConstructorOptions[] = [
   {
+    label: 'File',
+    submenu: [
+      {role: 'close'},
+    ]
+  },
+  {
     label: "Edit",
     submenu: [
       {role: "undo"},
