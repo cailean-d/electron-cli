@@ -30,6 +30,7 @@ async function generateAngular(opts) {
   const cmd = `ng new ${opts.project_name} 
               --style=${opts.style} 
               --skipInstall=true 
+              --commit=false 
               --routing=${opts.routing}`;
 
   try {
