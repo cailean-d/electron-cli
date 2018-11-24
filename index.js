@@ -17,7 +17,8 @@ program
   .action(require('./commands/build'))
 
 program
-  .command('start')
+  .command('start [project]')
+  .option("-l, --list [mode]", "Open list of exist projects")
   .description('Start project in development mode')
   .action(require('./commands/start'))
 

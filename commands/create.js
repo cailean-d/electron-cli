@@ -1,6 +1,7 @@
-const path = require('path');
-const inquirer = require('inquirer');
 const colors = require('colors');
+const editJsonFile = require('edit-json-file');
+const inquirer = require('inquirer');
+const path = require('path');
 const angular = require('./../questions/angular');
 const electron = require('./../questions/electron');
 const generateProject = require('../generate/_');
@@ -55,6 +56,7 @@ module.exports = async function() {
         genProjectPath();
         genProjectOptions();
         generateProject(answers);
+        savePath();
 
     } catch (error) {
         console.log(error);
@@ -68,4 +70,15 @@ function genProjectPath() {
 function genProjectOptions() {
     answers = Object.assign({}, answers[0], answers[1], answers[2]);
     answers.style = parseStyle(answers.style);
+}
+
+function savePath() {
+    let tmpPath = editJsonFile(path.join(__dirname, './../tmp/path.json'));
+    let tmp_obj = tmpPath.toObject();
+    tmp_obj.projects.push({
+        "name": answers.project_name,
+        "path": answers.project_path,
+    });
+    tmpPath.set("projects", tmp_obj);
+    tmpPath.save();
 }
