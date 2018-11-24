@@ -5,6 +5,13 @@
 <% if (comments) { %>// Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 <% } %>let mainWindow;
+<% if (comments) { %>
+// Reloading all application windows on files changes<% } %>
+if (process.env.NODE_ENV == 'development') {
+  require('electron-reload')(__dirname, {
+    electron: require(`${__dirname}/node_modules/electron`)
+  });
+}
 
 function createWindow() {<% if (comments) { %>
   // Create the browser window.<% } %>
