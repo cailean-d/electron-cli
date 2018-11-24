@@ -16,6 +16,11 @@ program
   .description('Build project')
   .action(require('./commands/build'))
 
+program
+  .command('start')
+  .description('Start project in development mode')
+  .action(require('./commands/start'))
+
 program.on('option:*', showHelp);
 program.on('command:*', showHelp);
 
