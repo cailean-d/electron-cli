@@ -8,6 +8,7 @@
 <% if (comments) { %>
 // Reloading all application windows on files changes<% } %>
 if (process.env.NODE_ENV == 'development') {
+  process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
   require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
   });
