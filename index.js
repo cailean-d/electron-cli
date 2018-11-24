@@ -22,6 +22,11 @@ program
   .description('Start project in development mode')
   .action(require('./commands/start'))
 
+program
+  .command('clear')
+  .description('Clear list of projects')
+  .action(require('./commands/clear'))
+
 program.on('option:*', showHelp);
 program.on('command:*', showHelp);
 
