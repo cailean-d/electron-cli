@@ -1,10 +1,15 @@
-const { Menu } = require('electron');
+const { app, Menu } = require('electron');
 
 const template = [
   {
     label: 'File',
     submenu: [
-      {role: 'close'},
+      {
+        label: 'Exit',
+        click: () => {
+          app.exit();
+        }
+      },
     ]
   },
   {

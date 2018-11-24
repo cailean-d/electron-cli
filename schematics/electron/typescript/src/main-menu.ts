@@ -1,10 +1,15 @@
-import { Menu } from "electron";
+import { app, Menu } from "electron";
 
 const template: Electron.MenuItemConstructorOptions[] = [
   {
-    label: 'File',
+    label: "File",
     submenu: [
-      {role: 'close'},
+      {
+        label: "Exit",
+        click: () => {
+          app.exit();
+        }
+      },
     ]
   },
   {
