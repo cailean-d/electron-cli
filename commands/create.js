@@ -75,6 +75,7 @@ function genProjectOptions() {
 function savePath() {
     let tmpPath = editJsonFile(path.join(__dirname, './../tmp/path.json'));
     let tmp_obj = tmpPath.toObject();
+    tmp_obj.active = answers.project_name;
     tmp_obj.projects.push({
         "name": answers.project_name,
         "path": answers.project_path,

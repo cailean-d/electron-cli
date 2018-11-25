@@ -1,3 +1,21 @@
 {
-  "projects": []
+  "active": "qwer3",
+  "projects": [
+    {
+      "name": "new-project",
+      "path": "D:\\Projects\\Z_TESTS\\new-project"
+    },
+    {
+      "name": "qwer1",
+      "path": "D:\\Projects\\Z_TESTS\\qwer1"
+    },
+    {
+      "name": "qwer2",
+      "path": "D:\\Projects\\Z_TESTS\\qwer2"
+    },
+    {
+      "name": "qwer3",
+      "path": "D:\\Projects\\Z_TESTS\\qwer3"
+    }
+  ]
 }

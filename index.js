@@ -18,7 +18,7 @@ program
 
 program
   .command('start [project]')
-  .option("-l, --list [mode]", "Open list of exist projects")
+  .option("-l, --list", "Open list of exist projects")
   .description('Start project in development mode')
   .action(require('./commands/start'))
 
@@ -26,6 +26,23 @@ program
   .command('clear')
   .description('Clear list of projects')
   .action(require('./commands/clear'))
+
+program
+  .command('add [module]')
+  .option("-l, --list", "Choose a project to add a module to")
+  .description('Add module to electron project')
+  .action(require('./commands/add'))
+
+program
+  .command('activate')
+  .description('Choose a project to be an active')
+  .action(require('./commands/activate'))
+
+program
+  .command('open')
+  .option("-l, --list", "Choose a project to open vscode in")
+  .description('Open active project in vscode')
+  .action(require('./commands/open'))
 
 program.on('option:*', showHelp);
 program.on('command:*', showHelp);

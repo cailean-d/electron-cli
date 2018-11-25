@@ -20,7 +20,8 @@ module.exports = async function(project, options) {
   } else if (project) {
     if (!setProjectByName(project)) return console.log(projectError.red);
   } else {
-    projectPath = tmp.projects[tmp.projects.length -1].path;
+    let i = projectIndex(tmp.active);
+    projectPath = tmp.projects[i].path;
   }
 
   runProject();
