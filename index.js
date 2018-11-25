@@ -13,6 +13,7 @@ program
 
 program
   .command('build')
+  .option("-l, --list", "Choose a project to build")
   .description('Build project')
   .action(require('./commands/build'))
 
