@@ -40,7 +40,7 @@ program
 
 program
   .command('open')
-  .option("-l, --list", "Choose a project to open vscode in")
+  .option("-l, --list", "Choose a project to open in vscode")
   .description('Open active project in vscode')
   .action(require('./commands/open'))
 
