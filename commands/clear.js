@@ -1,16 +1,21 @@
 const colors = require('colors');
-const editJsonFile = require('edit-json-file');
+const fs = require('fs');
 const path = require('path');
 
-module.exports = function() {
-  clearPath();
-  console.log('\nList of projects are successfully cleared'.green);
-}
+const pathx = path.join(__dirname, './../tmp');
 
-function clearPath() {
-  let tmpPath = editJsonFile(path.join(__dirname, './../tmp/path.json'));
-  let tmp_obj = tmpPath.toObject();
-  tmp_obj.projects = [];
-  tmpPath.set("projects", tmp_obj);
-  tmpPath.save();
+module.exports = function() {
+  try {
+    if (fs.existsSync(pathx)) {
+      fs.readdirSync(pathx).forEach((file) => {
+        fs.unlinkSync(path.join(pathx, file));
+      })
+      fs.rmdirSync(pathx);
+      console.log('\nTemp files are successfully deleted.'.green);
+    } else {
+      console.log('\nThere aren\'t temp files.'.red);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }

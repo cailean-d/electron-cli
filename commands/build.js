@@ -1,23 +1,29 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 const path = require('path');
 const build = require('./../questions/build');
 const runShellCommand = require('./../util/shell');
 const tmpPath = path.join(__dirname, './../tmp/path.json');
-const tmp = require(tmpPath);
+
+let tmp;
 
 module.exports = async function(options) {
-	if (tmp.projects.length == 0) {
-		return console.log('\nNo projects created!'.red);
-	}
-		 
-  if (options.list) {
-    await setProjectFromList();
-  } else {
-    let i = projectIndex(tmp.active);
-    projectPath = tmp.projects[i].path;
+  try {
+    fs.accessSync(tmpPath, fs.constants.R_OK);
+    tmp = require(tmpPath);
+    if (tmp.projects.length == 0) {
+      throw new Error();
+    }
+    if (options.list) {
+      await setProjectFromList();
+    } else {
+      let i = projectIndex(tmp.active);
+      projectPath = tmp.projects[i].path;
+    }
+    await buildProject();
+  } catch (error) {
+    console.log('\nNo projects created!'.red);
   }
-
-  await buildProject();
 }
 
 function projectIndex(proj) {

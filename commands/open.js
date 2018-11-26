@@ -1,27 +1,31 @@
 const colors = require('colors');
+const fs = require('fs');
 const inquirer = require('inquirer');
 const path = require('path');
 const runShellCommand = require('./../util/shell');
 const { vscode } = require('./../questions/run');
 
 const tmpPath = path.join(__dirname, './../tmp/path.json');
-const tmp = require(tmpPath);
-let projectPath;
+let projectPath, tmp;
 
 module.exports = async function(options) {
-  if (tmp.projects.length == 0) {
-    return console.log('\nNo projects created!'.red);
+  try {
+    fs.accessSync(tmpPath, fs.constants.R_OK);
+    tmp = require(tmpPath);
+    if (tmp.projects.length == 0) {
+      throw new Error();
+    }
+    if (options.list) {
+      await setProjectFromList();
+    } else {
+      let i = projectIndex(tmp.active);
+      projectPath = tmp.projects[i].path;
+    }
+    await openProject();
+    console.log('\nActive project is successfully opened in vscode.'.green);
+  } catch (error) {
+    console.log('\nNo projects created!'.red);
   }
-
-  if (options.list) {
-    await setProjectFromList();
-  } else {
-    let i = projectIndex(tmp.active);
-    projectPath = tmp.projects[i].path;
-  }
-
-  await openProject();
-  console.log('\nActive project is successfully opened in vscode.'.green);
 }
 
 function projectIndex(proj) {

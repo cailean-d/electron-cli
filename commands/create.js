@@ -1,5 +1,6 @@
 const colors = require('colors');
 const editJsonFile = require('edit-json-file');
+const fs = require('fs');
 const inquirer = require('inquirer');
 const path = require('path');
 const angular = require('./../questions/angular');
@@ -12,6 +13,7 @@ const react = require('./../questions/react');
 const vue = require('./../questions/vue');
 
 let answer, answers = [];
+const pathx = path.join(__dirname, './../tmp/path.json');
 
 module.exports = async function() {
     try {
@@ -73,13 +75,24 @@ function genProjectOptions() {
 }
 
 function savePath() {
-    let tmpPath = editJsonFile(path.join(__dirname, './../tmp/path.json'));
+    try {
+        fs.accessSync(pathx, fs.constants.R_OK)
+    } catch (error) {
+        if (!fs.existsSync(path.dirname(pathx))) fs.mkdirSync(path.dirname(pathx));
+        fs.writeFileSync(pathx, '{}');
+    }
+    editPath();
+}
+
+function editPath() {
+    let tmpPath = editJsonFile(pathx);
     let tmp_obj = tmpPath.toObject();
+    if (!tmp_obj.projects) tmp_obj.projects = [];
     tmp_obj.projects.push({
         "name": answers.project_name,
         "path": answers.project_path,
     });
-    tmpPath.set("projects", tmp_obj);
     tmpPath.set("active", answers.project_name);
+    tmpPath.set("projects", tmp_obj);
     tmpPath.save();
 }

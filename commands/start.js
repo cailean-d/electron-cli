@@ -1,30 +1,35 @@
 const colors = require('colors');
+const fs = require('fs');
 const inquirer = require('inquirer');
 const path = require('path');
 const runShellCommand = require('./../util/shell');
 
 const tmpPath = path.join(__dirname, './../tmp/path.json');
-const tmp = require(tmpPath);
+let tmp;
 const projectError = `\nProject doesn't exist. Use --list option to see list of projects.`;
 let projectPath;
 
 module.exports = async function(project, options) {
-  if (tmp.projects.length == 0) {
-    return console.log('\nNo projects created!'.red);
+  try {
+    fs.accessSync(tmpPath, fs.constants.R_OK);
+    tmp = require(tmpPath);
+    if (tmp.projects.length == 0) {
+      throw new Error();
+    }
+    if (options.list) {
+      await setProjectFromList();
+    } else if (project && project.match(/^\d+$/)) {
+      if (!setProjectByIndex(project)) return console.log(projectError.red);
+    } else if (project) {
+      if (!setProjectByName(project)) return console.log(projectError.red);
+    } else {
+      let i = projectIndex(tmp.active);
+      projectPath = tmp.projects[i].path;
+    }
+    runProject();
+  } catch (error) {
+    console.log('\nNo projects created!'.red);
   }
-
-  if (options.list) {
-    await setProjectFromList();
-  } else if (project && project.match(/^\d+$/)) {
-    if (!setProjectByIndex(project)) return console.log(projectError.red);
-  } else if (project) {
-    if (!setProjectByName(project)) return console.log(projectError.red);
-  } else {
-    let i = projectIndex(tmp.active);
-    projectPath = tmp.projects[i].path;
-  }
-
-  runProject();
 }
 
 function projectIndex(proj) {
