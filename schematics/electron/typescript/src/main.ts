@@ -6,6 +6,14 @@ import * as path from "path";
 <% if (comments) { %>// Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 <% } %>let mainWindow: Electron.BrowserWindow;
+<% if (comments) { %>
+// Reloading all application windows on files changes<% } %>
+if (process.env.NODE_ENV === "development") {
+  process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "true";
+  require("electron-reload")(path.resolve(__dirname, "./../"), {
+    electron: require(path.resolve(__dirname, "./../node_modules/electron")),
+  });
+}  
 
 function createWindow() {<% if (comments) { %>
   // Create the browser window.<% } %>
