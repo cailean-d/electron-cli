@@ -19,8 +19,8 @@ exports.vscode = [
 		name: 'vscode_mode',
 		message: 'Open in current or new window: ',
 		choices: [
-			'Current window',
 			'New window',
+			'Current window',
 		]
 	},
 ]
