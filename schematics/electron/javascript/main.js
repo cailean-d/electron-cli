@@ -22,7 +22,9 @@ function createWindow() {<% if (comments) { %>
   mainWindow.loadFile('index.html');<% if (dev_tools) { %><% if (comments) { %>
 
   // Open the DevTools.<% } %>
-  mainWindow.webContents.openDevTools()<% } %><% if (comments) { %>
+  if (process.env.NODE_ENV === "development") {
+    mainWindow.webContents.openDevTools();
+  }<% } %><% if (comments) { %>
 
   // Emitted when the window is closed.<% } %>
   mainWindow.on('closed', function (){<% if (comments) { %>
