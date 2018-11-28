@@ -30,6 +30,7 @@ async function editPackage() {
   const builder_ver = await checkVersion('electron-builder');
   const reload_ver = await checkVersion('electron-reload');
   const run_all_ver = await checkVersion('npm-run-all');
+  const del_ver = await checkVersion('rimraf');
   let package = editJsonFile(path.join(options.project_path, 'package.json'));
   package.set("devDependencies.electron", `^${el_ver}`);
   package.set("devDependencies.electron-builder", `^${builder_ver}`);
@@ -39,11 +40,15 @@ async function editPackage() {
     package.set("devDependencies.tslint", `^${tslint_ver}`);
     package.set("devDependencies.typescript", `^${typescript_ver}`);
     package.set("devDependencies.npm-run-all", `^${run_all_ver}`);
+    package.set("devDependencies.rimraf", `^${del_ver}`);
     package.set("scripts.build", "tsc");
     package.set("scripts.watch", "tsc -w");
     package.set("scripts.electron", "npm run build && ENV NODE_ENV=development electron ./dist/main.js");
     package.set("scripts.lint", "tslint -c tslint.json -p tsconfig.json");
     package.set("scripts.start", "npm-run-all -p electron watch");
+    package.set("scripts.build:windows", "npm run build && electron-builder build --windows && rimraf dist");
+    package.set("scripts.build:linux", "npm run build && electron-builder build --linux && rimraf dist");
+    package.set("scripts.build:mac", "npm run build && electron-builder build --mac && rimraf dist");
   } else if (options.lang === 'JavaScript') {
     package.set("scripts.start", "ENV NODE_ENV=development electron .");
     package.set("scripts.build:windows", "electron-builder build --windows");

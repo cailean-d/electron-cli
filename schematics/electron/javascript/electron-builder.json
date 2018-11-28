@@ -1,15 +1,17 @@
 {
   "directories": {
-    "output": "release/"
+    "output": "out/"
   },
   "files": [
       "**/*",
       "!**/*.ts",
+      "!**/*.map",
       "!*.code-workspace",
       "!LICENSE.md",
       "!package.json",
       "!package-lock.json",
       "!src/",
+      "src/index.html",
       "!e2e/",
       "!hooks/",
       "!angular.json",

@@ -10,7 +10,7 @@ import * as path from "path";
 // Reloading all application windows on files changes<% } %>
 if (process.env.NODE_ENV === "development") {
   process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "true";
-  require("electron-reload")(path.resolve(__dirname, "./../"), {
+  require("electron-reload")(path.resolve(__dirname, "./../src/"), {
     electron: require(path.resolve(__dirname, "./../node_modules/electron")),
   });
 }  
@@ -20,7 +20,7 @@ function createWindow() {<% if (comments) { %>
   mainWindow = new BrowserWindow({ width: 800, height: 600 });<% if (comments) { %>
 
   // and load the index.html of the app.<% } %>
-  mainWindow.loadFile(path.join(__dirname, "../index.html"));<% if (dev_tools) { %><% if (comments) { %>
+  mainWindow.loadFile(path.join(__dirname, "../src/index.html"));<% if (dev_tools) { %><% if (comments) { %>
 
   // Open the DevTools.<% } %>
   mainWindow.webContents.openDevTools()<% } %><% if (comments) { %>

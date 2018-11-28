@@ -2,7 +2,7 @@ module.exports = [
 	{
 		type: 'list',
 		name: 'os',
-		message: 'Choose OS type: ',
+		message: 'Choose OS: ',
 		default: 'windows',
 		choices: [
 				'windows',
