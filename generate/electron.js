@@ -50,7 +50,8 @@ async function editPackage() {
     package.set("scripts.build:linux", "npm run build && electron-builder build --linux && rimraf dist");
     package.set("scripts.build:mac", "npm run build && electron-builder build --mac && rimraf dist");
   } else if (options.lang === 'JavaScript') {
-    package.set("scripts.start", "ENV NODE_ENV=development electron .");
+    package.set("main", "./src/main.js");
+    package.set("scripts.start", "ENV NODE_ENV=development electron ./src/main.js");
     package.set("scripts.build:windows", "electron-builder build --windows");
     package.set("scripts.build:linux", "electron-builder build --linux");
     package.set("scripts.build:mac", "electron-builder build --mac");
@@ -60,11 +61,18 @@ async function editPackage() {
 
 async function copyFiles() {
 
-  let source = path.join(__dirname, `./../schematics/electron/${options.lang.toLowerCase()}`);
+  let source = path.join(__dirname, `./../schematics/electron/`);
   let destination = path.join(options.project_path);
 
   let opts = {
     filter: (filename) => {
+      if (options.lang === "JavaScript") {
+        if (/(\\ts(.(?!\\))+\.json)|((\\(.(?!\\))+\.ts$))$/.test(filename)) {
+          return false;
+        }
+      } else if (/\.js$/.test(filename)) {
+        return false;
+      }
       if (!options.default_menu && /main-menu\.(j|t)s$/.test(filename)) {
         return false;
       }

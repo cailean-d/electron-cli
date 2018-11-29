@@ -2,6 +2,7 @@
   "directories": {
     "output": "out/"
   },
+  "asar": true,
   "files": [
     "**/*",
     "!**/*.ts",
@@ -9,7 +10,7 @@
     "!*.code-workspace",
     "!LICENSE.md",
     "!package.json",
-    "!package-lock.json",
+    "!package-lock.json",<% if (lang == 'TypeScript') { %>
     "!src/",
     "src/index.html",
     "!e2e/",
@@ -18,7 +19,7 @@
     "!_config.yml",
     "!karma.conf.js",
     "!tsconfig.json",
-    "!tslint.json"
+    "!tslint.json"<% } %>
   ],
   "win": {
     "target": [

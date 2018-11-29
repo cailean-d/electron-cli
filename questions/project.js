@@ -80,7 +80,7 @@ module.exports = [
 	{
 		type: 'confirm',
 		name: 'skip_install',
-		message: 'Skip modules installing: ',
+		message: 'Skip module installing: ',
 		default: false
 	},
 ];

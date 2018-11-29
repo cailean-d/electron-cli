@@ -1,5 +1,6 @@
 <% if (comments) { %>// Modules to control application life and create native browser window
 <% } %>const { app, BrowserWindow } = require('electron');
+const path = require('path');
 <% if (default_menu) { %>const defaultMenu = require('./main-menu');
 <% } %>
 <% if (comments) { %>// Keep a global reference of the window object, if you don't, the window will
@@ -9,8 +10,8 @@
 // Reloading all application windows on files changes<% } %>
 if (process.env.NODE_ENV == 'development') {
   process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
-  require('electron-reload')(__dirname, {
-    electron: require(`${__dirname}/node_modules/electron`)
+  require('electron-reload')(path.resolve(__dirname, "./../src/"), {
+    electron: require(path.resolve(__dirname, "./../node_modules/electron"))
   });
 }
 
@@ -19,7 +20,7 @@ function createWindow() {<% if (comments) { %>
   mainWindow = new BrowserWindow({ width: 800, height: 600 });<% if (comments) { %>
 
   // and load the index.html of the app.<% } %>
-  mainWindow.loadFile('index.html');<% if (dev_tools) { %><% if (comments) { %>
+  mainWindow.loadFile(path.join(__dirname, "../src/index.html"));<% if (dev_tools) { %><% if (comments) { %>
 
   // Open the DevTools.<% } %>
   if (process.env.NODE_ENV === "development") {

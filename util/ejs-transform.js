@@ -13,7 +13,8 @@ module.exports = class EjsTransform extends Transform {
     let out = template({ 
       comments: this.options.comments, 
       default_menu: this.options.default_menu, 
-      dev_tools: this.options.dev_tools
+      dev_tools: this.options.dev_tools,
+      lang: this.options.lang,
     });
     this.push(out);
     callback();
