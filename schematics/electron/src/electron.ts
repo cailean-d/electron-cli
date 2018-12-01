@@ -17,7 +17,17 @@ if (process.env.NODE_ENV === "development") {
 
 function createWindow() {<% if (comments) { %>
   // Create the browser window.<% } %>
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });<% if (comments) { %>
+  mainWindow = new BrowserWindow({ width: 800, height: 600 });<% if (framework == 'Angular') { %>
+
+  if (process.env.NODE_ENV === "development") {<% if (comments) { %>
+    // Listen for angular dev server.<% } %>
+    mainWindow.loadURL("http://localhost:4200");<% if (dev_tools) { %><% if (comments) { %>
+    // Open the DevTools.<% } %>
+    mainWindow.webContents.openDevTools();<% } %>
+  } else {<% if (comments) { %>
+    // Load the index.html of the app.<% } %>
+    mainWindow.loadFile(path.join(__dirname, "<%- angular_path %>/index.html"));
+  }<% } else { %><% if (comments) { %>
 
   // and load the index.html of the app.<% } %>
   mainWindow.loadFile(path.join(__dirname, "../src/index.html"));<% if (dev_tools) { %><% if (comments) { %>
@@ -25,7 +35,8 @@ function createWindow() {<% if (comments) { %>
   // Open the DevTools.<% } %>
   if (process.env.NODE_ENV === "development") {
     mainWindow.webContents.openDevTools();
-  }<% } %><% if (comments) { %>
+  }<% } %><% } %>
+  <% if (comments) { %>
 
   // Emitted when the window is closed.<% } %>
   mainWindow.on("closed", () => {<% if (comments) { %>
@@ -34,9 +45,9 @@ function createWindow() {<% if (comments) { %>
     // when you should delete the corresponding element.<% } %>
     mainWindow = null;
   });
-<% if (comments) { %>
-  // Set Default menu
-  <% } %><% if (default_menu) { %>mainWindow.setMenu(DefaultMenu);<% } %><% if (!default_menu) { %>mainWindow.setMenu(null);<% } %>
+  <% if (comments) { %>
+  // Set Default menu<% } %><% if (default_menu) { %>
+  mainWindow.setMenu(DefaultMenu);<% } %><% if (!default_menu) { %>mainWindow.setMenu(null);<% } %>
 }
 
 <% if (comments) { %>// This method will be called when Electron has finished

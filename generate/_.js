@@ -27,14 +27,22 @@ module.exports = function(options) {
 }
 
 async function generateAngular(opts) {
+  opts.lang = "TypeScript";
   const cmd = `ng new ${opts.project_name} 
               --style=${opts.style} 
               --skipInstall=true 
               --commit=false 
-              --routing=${opts.routing}`;
-
+              --routing=${opts.routing}`.replace(/(\r\n\t|\n|\r\t|\s+)/gm," ");
   try {
-    await runShellCommand('Creating angular project', cmd, { shell: true })
+    console.log('');
+    await runShellCommand('Creating angular project', cmd, { shell: true });
+    editPackageJSON(opts);
+    await generateLicense(opts);
+    await genElectron(opts);
+    if (!opts.skip_install) {
+      await installNpmPackages(opts);
+      await runProject(opts);
+    } 
   } catch (error) {
     console.log(error);
   }

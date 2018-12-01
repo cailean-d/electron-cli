@@ -15,6 +15,9 @@ module.exports = class EjsTransform extends Transform {
       default_menu: this.options.default_menu, 
       dev_tools: this.options.dev_tools,
       lang: this.options.lang,
+      framework: this.options.project_type,
+      name: this.options.project_name,
+      angular_path: this.options.angular_path,
     });
     this.push(out);
     callback();

@@ -4,22 +4,9 @@
   },
   "asar": true,
   "files": [
-    "**/*",
-    "!**/*.ts",
-    "!**/*.map",
-    "!*.code-workspace",
-    "!LICENSE.md",
-    "!package.json",
-    "!package-lock.json",<% if (lang == 'TypeScript') { %>
-    "!src/",
-    "src/index.html",
-    "!e2e/",
-    "!hooks/",
-    "!angular.json",
-    "!_config.yml",
-    "!karma.conf.js",
-    "!tsconfig.json",
-    "!tslint.json"<% } %>
+    "dist/**/*",
+    "!*.map"<% if (framework == 'No framework') { %>,
+    "src/**/*"<% } %>
   ],
   "win": {
     "target": [
